@@ -1,0 +1,22 @@
+[
+    {
+        "label":"foliage",
+        "clip_desc":"photo of a plant leaf",
+        "shortest_side": 100
+    },
+    {
+        "label":"fruit",
+        "clip_desc":"photo of a plant fruit",
+        "shortest_side": 100
+    },
+    {
+        "label":"stem",
+        "clip_desc":"photo of a plant stem, trunk or branch",
+        "shortest_side": 100
+    },
+    {
+        "label":"flower",
+        "clip_desc":"photo of a plant flower",
+        "shortest_side": 100
+    }
+]
