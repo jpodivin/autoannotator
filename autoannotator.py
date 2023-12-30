@@ -43,7 +43,7 @@ def get_labels(
         source_path, labels=None, min_certainty=0.89, output_dir='./outputs',
         sam_model="facebook/sam-vit-base", clip_model="openai/clip-vit-base-patch32",
         longest_edge=900, device='auto'):
-    
+
     if device == 'auto':
         sam_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         clip_device = sam_device
@@ -86,14 +86,14 @@ def get_labels(
     for image_path in glob.glob(os.path.join(source_path, "**.jpg")):
         image = Image.open(image_path)
         ratio = longest_edge/max(image.size)
-    
+
         new_size = (
             int(image.size[0]*ratio),
             int(image.size[1]*ratio))
 
         print(f"image size {image.size} to {new_size}")
         mask_image = image.resize(new_size)
-            
+
         masks = generator(mask_image, points_per_batch=64, stability_score_thresh=0.89)
 
         # Get BBs
@@ -102,7 +102,7 @@ def get_labels(
 
         image_id = os.path.basename(image_path)
         with open(os.path.join(b_box_dir, image_id) + '.json', 'w') as f:
-            
+
             json.dump(
                 {
                     "boxes": boxes,
@@ -138,7 +138,7 @@ def get_labels(
 def main():
     parser = argparse.ArgumentParser(
         prog="autoannotator", usage="point to stuff get your things",)
-    
+
     parser.add_argument("source_path", action='store')
     parser.add_argument("--labels", type=str)
     parser.add_argument("--min-certainty", type=float, default=0.89)
